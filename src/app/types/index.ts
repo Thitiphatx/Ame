@@ -1,5 +1,13 @@
 export type NavigationPage = "/" | "/search" | "/user"
 
+export type NavigationBar = {
+    path: NavigationPage,
+    icon: {
+        outline: JSX.Element,
+        fill: JSX.Element
+    }
+}
+
 export interface Episode {
     id: string,
     number: number,

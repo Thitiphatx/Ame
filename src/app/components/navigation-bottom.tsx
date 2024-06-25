@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { HomeFillIcon, HomeOutlineIcon, SearchFillIcon, SearchOutlineIcon, UserFillIcon, UserOutlineIcon } from "../icons"
-import { NavigationPage } from "../types";
-import { redirect, useRouter } from "next/navigation";
+import { NavigationBar, NavigationPage } from "../types";
+import { useRouter } from "next/navigation";
 
 export default function NavigationBottom() {
     const [currentPage, setCurrentPage] = useState<NavigationPage>("/");
     const router = useRouter();
-    const links = [
+    const links: NavigationBar[] = [
         {
             path: "/",
             icon: {

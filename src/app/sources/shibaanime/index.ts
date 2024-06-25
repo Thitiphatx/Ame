@@ -1,4 +1,5 @@
-import { AnimeSource, Episode, EpisodeDetail, SearchItem, SourceSearchResponse } from "@/app/types/source";
+import { Episode, EpisodeDetail } from "@/app/types";
+import { AnimeSource, SearchItem, SourceSearchResponse } from "@/app/types/source";
 import axios from 'axios';
 import cheerio from 'cheerio';
 

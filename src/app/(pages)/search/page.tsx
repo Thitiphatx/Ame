@@ -1,7 +1,7 @@
 "use client"
 
 import { AnimeListResponse } from "@/app/types";
-import { Button, Input } from "@nextui-org/react"
+import { Button, Input, Image, Card, CardBody, CardFooter } from "@nextui-org/react"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -30,20 +30,19 @@ export default function Page() {
                 <Input label="search" value={strQuery} onValueChange={setStrQuery} />
             </form>
             <div className="grid sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-6 gap-5">
-                {data.map((item)=> (
-                    <div key={item.id} className="w-full space-y-3 cursor-pointer transition scale-95 hover:scale-100 snap-start" onClick={()=> router.push(`/anime/${item.id}`)}>
-                        <div className="w-full h-72">
-                            <img className="object-cover w-full h-full rounded-lg" alt={item.title.userPreferred} src={item.coverImage.large}/>
-                        </div>
-                        <div className="w-full">
-                            <h2 className="truncate font-bold">{item.title.userPreferred}</h2>
+                {data?.map((item)=> (
+                    <Card isPressable key={item.id} className="w-full space-y-3 cursor-pointer transition scale-95 hover:scale-100 snap-start" onClick={()=> router.push(`/anime/${item.id}`)}>
+                        <CardBody className="p-0">
+                            <Image width={"100%"} className="object-cover h-96 rounded-lg" alt={item.title.userPreferred} src={item.coverImage.large}/>
+                        </CardBody>
+                        <CardFooter className="w-full flex flex-col justify-start items-start">
+                            <h2 className="truncate font-bold w-full text-left">{item.title.userPreferred}</h2>
                             <small>{item.episodes && `${item.episodes} episodes `}</small>
-                        </div>
-                    </div>
+                        </CardFooter>
+                    </Card>
                 ))}
             </div>
-            {(data.length % 18 === 0 && data.length != 0) && <Button onClick={loadMore}>Load more</Button>}
-
+            {(data?.length % 18 === 0 && data.length != 0) && <Button onClick={loadMore}>Load more</Button>}
         </div>
     )
 }

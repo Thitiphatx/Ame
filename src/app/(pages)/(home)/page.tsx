@@ -1,5 +1,4 @@
 import AnimeCardList from "@/app/components/home/anime-card-list";
-import { Button } from "@nextui-org/react";
 
 export default function Home() {
     
@@ -15,7 +14,3 @@ export default function Home() {
 
 
 const active = "bg-black hover:bg-danger"
-
-function getTrendingQuery() {
-
-}

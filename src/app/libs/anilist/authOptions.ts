@@ -1,8 +1,7 @@
-import { AuthOptions, CallbacksOptions } from "next-auth";
-import NextAuth from "next-auth/next";
-import { OAuthConfig } from "next-auth/providers/index";
+import { CallbacksOptions, AuthOptions } from "next-auth";
+import { OAuthConfig } from "next-auth/providers/oauth";
 
-const AnilistProvider: OAuthConfig<any> = {
+export const AnilistProvider: OAuthConfig<any> = {
     id: "anilist",
     name: "Anilist",
     type: "oauth",
@@ -28,7 +27,7 @@ interface CustomCallbacksOptions extends CallbacksOptions {
     authorized?: (params: { request: any; auth: any }) => boolean;
 }
 
-const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = {
     providers: [AnilistProvider],
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
@@ -37,7 +36,3 @@ const authOptions: AuthOptions = {
         },
     } as CustomCallbacksOptions,
 }
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };

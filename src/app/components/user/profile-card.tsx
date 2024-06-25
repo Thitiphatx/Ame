@@ -8,7 +8,7 @@ export default function ProfileCard() {
     return (
         <Card radius="sm">
             <CardBody className="flex flex-col justify-center items-center gap-2">
-                <Image src={session?.user?.image ?? ""} radius="sm"/>
+                <Image alt={session?.user?.name ?? ""} src={session?.user?.image ?? ""} radius="sm"/>
                 <h1 className="font-bold text-xl">{session?.user?.name}</h1>
             </CardBody>
             <CardFooter className="flex flex-col justify-center items-center">
