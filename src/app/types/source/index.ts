@@ -10,12 +10,17 @@ export abstract class AnimeSource {
         readonly apiURL?: string,
     }
 
-    abstract getSearch(query: string, page?: string): Promise<SourceSearchResult[]>;
+    abstract getSearch(query: string, page?: string): Promise<SourceSearchResponse>;
     abstract getEpisodes(id: string): Promise<Episode[]>;
     abstract getEpisodeDetails(id: string): Promise<EpisodeDetail>;
 }
 
-export interface SourceSearchResult {
+export interface SourceSearchResponse {
+    id: string,
+    items: SearchItem[]
+}
+
+export interface SearchItem {
     id: string,
     title: string,
     coverImage: string

@@ -1,11 +1,15 @@
 export type NavigationPage = "/" | "/search" | "/user"
-export type RunnerAction = "getEpisodeDetails" | "getEpisodes" | "getSearch" | "metadata"
 
 export interface Episode {
     id: string,
     number: number,
     title?: string,
     coverImage?: string
+}
+
+export interface EpisodeSource {
+    id: string, // source id
+    episodes: Episode[]
 }
 
 export interface EpisodeDetail {
@@ -24,6 +28,7 @@ export type AnimeDetailResponse = {
     description: string;
     type: string;
     episodes: number;
+    episodeList?: EpisodeSource,
     startDate: {
         year: number;
         month: number;

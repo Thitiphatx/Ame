@@ -1,4 +1,4 @@
-import { AnimeSource, Episode, EpisodeDetail, SourceSearchResult } from "@/app/types/source";
+import { AnimeSource, Episode, EpisodeDetail, SearchItem, SourceSearchResponse } from "@/app/types/source";
 import axios from 'axios';
 import cheerio from 'cheerio';
 
@@ -11,10 +11,10 @@ export class ShibaAnime extends AnimeSource {
         baseURL: "https://www.shibaanime.com"
     }
 
-    async getSearch(query: string, page?: string): Promise<SourceSearchResult[]> {
+    async getSearch(query: string, page?: string): Promise<SourceSearchResponse> {
         const { data } = await axios.get(`${this.metadata.baseURL}/search/page/1?q=${encodeURI(query)}`)
         const $ = cheerio.load(data);
-        const result: SourceSearchResult[] = [];
+        const result: SearchItem[] = [];
         $('div.flex-wrap-movielist > div > a').map((index, anime) => {
             const id = $(anime).attr('href') ?? "";
             const coverImage = $('img', anime).attr('data-src') ?? "";
@@ -26,7 +26,10 @@ export class ShibaAnime extends AnimeSource {
                 coverImage
             })
         })
-        return result;
+        return {
+            id: this.metadata.id,
+            items: result
+        };
     }
 
     async getEpisodes(id: string): Promise<Episode[]> {
@@ -53,6 +56,7 @@ export class ShibaAnime extends AnimeSource {
         const { data: data2 } = await axios.get(`${embedURL}`);
         const $2 = cheerio.load(data2);
         const srcID = $2.html().split("https://akuma-player.xyz/play/")[1].split(`\\"`)[0];
+        console.log(srcID)
         return {
             title,
             source: `https://files.akuma-player.xyz/view/${srcID}.m3u8`,
