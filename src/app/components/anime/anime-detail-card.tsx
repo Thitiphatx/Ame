@@ -16,7 +16,7 @@ export default function AnimeDetailCard() {
     const [searchBar, setSearchBar] = useState<string>(data?.title.userPreferred ?? "");
     const [searchResult, setSearchResult] = useState<SourceSearchResponse[]>([]);
 
-    const [playerUrl, setPlayerUrl] = useState<string | null>(null);
+    const [playerUrl, setPlayerUrl] = useState<string | null>("https://files.akuma-player.xyz/files/c792846822f88411ca220467598755c9_.txt");
 
     useEffect(()=> {
         const fetchData = async ()=> {
